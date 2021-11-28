@@ -1,0 +1,57 @@
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[user]
+	name = Ally Parker
+	email = ally.parker@red-gate.com
+[alias]
+	cm = checkout main
+	cob = "!f(){ git checkout -b $1; }; f"
+	rc = rebase --continue
+	ra = rebase --abort
+	rhm = reset --hard origin/main
+	rh = "!f(){ git reset --hard; git clean -f; }; f"
+	ru = remote update --prune
+	kill = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -D; }; f"
+	p = "!f(){ git checkout main; git ru; git rhm; }; f"
+	shove = push --force-with-lease
+	graph = log --oneline --graph
+	new = !git init && git symbolic-ref HEAD refs/heads/main
+    co = checkout
+[merge]
+    tool = meld
+[mergetool "meld"]
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+[mergetool]
+	keepBackup = false
+	prompt = false
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[difftool "meld"]
+	cmd = meld "$LOCAL" "$REMOTE"
+[rerere]
+	enabled = true
+	autoupdate = true
+[help]
+	autocorrect = 1
+[pull]
+	rebase = true
+[core]
+	excludesfile = ~/.gitignore
+    pager = delta
+    editor = vim
+	autocrlf = input
+[delta]
+    side-by-side = true
+ #   plus-color = "#012800"
+  #  minus-color = "#340001"
+   # syntax-theme = Monokai Extended
+
+[interactive]
+    diffFilter = delta --color-only
+[init]
+	defaultBranch = main

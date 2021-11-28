@@ -1,0 +1,6 @@
+right_format = """$kubernetes"""
+
+
+[kubernetes]
+disabled = false
+format = '[$symbol$context( \($namespace\))]($style)'

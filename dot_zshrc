@@ -105,6 +105,7 @@ export EDITOR='vim'
 alias k=kubectl
 alias kc=kubectx
 alias kn=kubens
+alias cm=chezmoi
 
 # Homebrew completions
 if type brew &>/dev/null

@@ -55,6 +55,12 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
 set -e -o pipefail
 
+
+# Install Plugins 
+# Set zsh as shell
+
+
+
 fancy_echo 'Setting up your shiny new laptop...'
 
 install_or_update_homebrew
@@ -65,16 +71,6 @@ if brew doctor; then
 else
   fancy_echo "Your Homebrew installation reported some errors or warnings."
   echo "Review the Homebrew messages to see if any action is needed."
-fi
-
-brewfile="Brewfile"
-echo "Installing everything..."
-
-fancy_echo "Installing formulas and casks from the Brewfile ..."
-if brew bundle --no-lock --file="$brewfile"; then
-  fancy_echo "All formulas and casks were installed successfully."
-else
-  fancy_echo "Some formulas or casks failed to install."
 fi
 
 fancy_echo "Installing chezmoi and applying dotfiles ..."
@@ -97,3 +93,15 @@ if [ -f "$HOME/.Brewfile" ]; then
     fancy_echo "Some items in .Brewfile were not installed successfully."
   fi
 fi
+
+fancy_echo "Installing OMZ..."
+if ! command -v omz >/dev/null; then 
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+fancy_echo "Setting ZSH as default shell..."
+if ! grep -Fxq $(command -v zsh) /etc/shells; then                                                       ☸ production-admin
+  command -v zsh | sudo tee -a /etc/shells
+fi
+
+chsh -s $(which zsh)

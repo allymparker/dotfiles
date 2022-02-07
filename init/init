@@ -61,42 +61,51 @@ set -e -o pipefail
 
 
 
-fancy_echo 'Setting up your shiny new laptop...'
+# fancy_echo 'Setting up your shiny new laptop...'
 
-install_or_update_homebrew
+# install_or_update_homebrew
 
-fancy_echo "Verifying the Homebrew installation..."
-if brew doctor; then
-  fancy_echo "Your Homebrew installation is good to go."
-else
-  fancy_echo "Your Homebrew installation reported some errors or warnings."
-  echo "Review the Homebrew messages to see if any action is needed."
-fi
+# fancy_echo "Verifying the Homebrew installation..."
+# if brew doctor; then
+#   fancy_echo "Your Homebrew installation is good to go."
+# else
+#   fancy_echo "Your Homebrew installation reported some errors or warnings."
+#   echo "Review the Homebrew messages to see if any action is needed."
+# fi
 
-fancy_echo "Installing chezmoi and applying dotfiles ..."
-brew bundle --file=- <<EOF
-    brew 'chezmoi'
-EOF
+# fancy_echo "Installing chezmoi and applying dotfiles ..."
+# brew bundle --file=- <<EOF
+#     brew 'chezmoi'
+# EOF
 
-if [ ! -f "$HOME/.config/chezmoi/chezmoi.toml" ]; then
-  chezmoi init --apply --verbose https://github.com/allymparker/dotfiles.git
-  chmod 0600 "$HOME/.config/chezmoi/chezmoi.toml"
-fi
+# if [ ! -f "$HOME/.config/chezmoi/chezmoi.toml" ]; then
+#   chezmoi init --apply --verbose https://github.com/allymparker/dotfiles.git
+#   chmod 0600 "$HOME/.config/chezmoi/chezmoi.toml"
+# fi
 
-fancy_echo "Running your customizations from ~/.init ..."
+# fancy_echo "Running your customizations from ~/.init ..."
 
-if [ -f "$HOME/.Brewfile" ]; then
-  fancy_echo "Installing tools and apps from .Brewfile..."
-  if brew bundle --file="$HOME/.Brewfile"; then
-    fancy_echo "All items in .Brewfile were installed successfully."
-  else
-    fancy_echo "Some items in .Brewfile were not installed successfully."
-  fi
-fi
+# if [ -f "$HOME/.Brewfile" ]; then
+#   fancy_echo "Installing tools and apps from .Brewfile..."
+#   if brew bundle --file="$HOME/.Brewfile"; then
+#     fancy_echo "All items in .Brewfile were installed successfully."
+#   else
+#     fancy_echo "Some items in .Brewfile were not installed successfully."
+#   fi
+# fi
 
 fancy_echo "Installing OMZ..."
-if ! command -v omz >/dev/null; then 
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+# fancy_echo "Cloning ZSH plugins..."
+if [ ! -d "$HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting" ]; then
+ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+
+if [ ! -d "$HOME/.oh-my-zsh/plugins/zsh-autosuggestions" ]; then
+ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
 fancy_echo "Setting ZSH as default shell..."

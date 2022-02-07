@@ -100,4 +100,6 @@ if ! grep -Fxq $(command -v zsh) /etc/shells; then
 	command -v zsh | sudo tee -a /etc/shells
 fi
 
-chsh -s $(which zsh)
+if ! echo $SHELL | grep zsh; then
+	chsh -s $(which zsh)
+fi

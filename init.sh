@@ -88,6 +88,9 @@ fi
 fancy_echo "Configuring OMZ plugins..."
 if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	# OMZ Moves the existing .zshrc to .zshrc.pre-oh-my-zsh, reapply chezmoi to undo it
+	chezmoi apply
+	rm ~/.zshrc.pre-oh-my-zsh
 fi
 
 if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
@@ -96,7 +99,6 @@ fi
 
 fancy_echo "Setting ZSH as default shell..."
 if ! grep -Fxq $(command -v zsh) /etc/shells; then
-	☸ production-admin
 	command -v zsh | sudo tee -a /etc/shells
 fi
 

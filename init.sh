@@ -118,4 +118,4 @@ if [ ! -f "$HOME/.vim/autoload/plug.vim" ]; then
 fi
 
 fancy_echo "Install Vim Plugins..."
-vim +PlugInstall
+vim +PlugInstall +qall

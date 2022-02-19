@@ -75,7 +75,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-colorscheme spaceduck
+silent! colorscheme spaceduck
 let g:lightline = {
   \ 'colorscheme': 'spaceduck',
   \ 'active': {

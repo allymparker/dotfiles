@@ -111,3 +111,11 @@ fi
 if ! echo $SHELL | grep zsh; then
 	chsh -s $(which zsh)
 fi
+
+fancy_echo "Install Vim Plug..."
+if [ ! -f "$HOME/.vim/autoload/plug.vim" ]; then
+	curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+fancy_echo "Install Vim Plugins..."
+vim +PlugInstall

@@ -35,6 +35,12 @@ install_or_update_homebrew() {
 install_homebrew() {
 	fancy_echo "Installing Homebrew ..."
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	
+	if uname -s | grep Linux; then
+		echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bash_profile
+    		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+	fi
+
 }
 
 update_homebrew() {

@@ -32,3 +32,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Bind ctrl Backspace/Del
 bindkey '^H' backward-kill-word
 bindkey '^[[3;5~' kill-word
+
+#Add Homebrew Completions as per https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"

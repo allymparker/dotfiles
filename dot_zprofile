@@ -25,9 +25,10 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-# eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-export PATH="$HOME/.cargo/bin:$PATH"
+if [ -d "/home/linuxbrew/.linuxbrew" ] ; then
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
 
 # Bind ctrl Backspace/Del
 bindkey '^H' backward-kill-word

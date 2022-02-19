@@ -89,14 +89,14 @@ fi
 fancy_echo "Configuring OMZ..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+	# OMZ Moves the existing .zshrc to .zshrc.pre-oh-my-zsh, reapply chezmoi to undo it
+	chezmoi apply
+	rm ~/.zshrc.pre-oh-my-zsh
 fi
 
 fancy_echo "Configuring OMZ plugins..."
 if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	# OMZ Moves the existing .zshrc to .zshrc.pre-oh-my-zsh, reapply chezmoi to undo it
-	chezmoi apply
-	rm ~/.zshrc.pre-oh-my-zsh
 fi
 
 if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then

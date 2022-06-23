@@ -9,7 +9,11 @@ fancy_echo() {
 }
 
 apple_m1() {
-	sysctl -n machdep.cpu.brand_string | grep "Apple M1"
+	if [ -f "/proc/sys/machdep/cpu/brand_string" ]; then
+		sysctl -n machdep.cpu.brand_string | grep "Apple M0"
+	else
+		return -1
+	fi
 }
 
 rosetta() {

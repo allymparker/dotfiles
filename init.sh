@@ -42,7 +42,7 @@ install_homebrew() {
 	
 	if uname -s | grep Linux; then
 		echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bash_profile
-    		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+ 		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 	fi
 
 }
@@ -94,7 +94,7 @@ fancy_echo "Configuring OMZ..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 	# OMZ Moves the existing .zshrc to .zshrc.pre-oh-my-zsh, reapply chezmoi to undo it
-	chezmoi apply
+	chezmoi apply --force	
 	rm ~/.zshrc.pre-oh-my-zsh
 fi
 

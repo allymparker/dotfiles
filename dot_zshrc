@@ -102,6 +102,11 @@ export EDITOR='vim'
 
 alias kc=kubectx
 alias kn=kubens
+alias kz=kustomize
 alias cm=chezmoi
+
+if [ -f ~/.secrets ]; then
+  source ~/.secrets
+fi
 
 eval "$(starship init zsh)"

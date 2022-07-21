@@ -21,18 +21,18 @@
 	new = !git init && git symbolic-ref HEAD refs/heads/main
     co = checkout
 [merge]
-    tool = meld
-[mergetool "meld"]
-    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
-[mergetool]
-	keepBackup = false
-	prompt = false
+  keepBackup = false
+  tool = p4merge
+[mergetool "p4merge"]
+  cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$PWD/$BASE\"" "\"$PWD/$REMOTE\"" "\"$PWD/$LOCAL\"" "\"$PWD/$MERGED\""
+  keepTemporaries = false
+  trustExitCode = false
+  keepBackup = false
 [diff]
-    tool = meld
-[difftool]
-    prompt = false
-[difftool "meld"]
-	cmd = meld "$LOCAL" "$REMOTE"
+  tool = p4merge
+  prompt = false
+[difftool "p4merge"]
+  cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$REMOTE\"" "\"$LOCAL\""
 [rerere]
 	enabled = true
 	autoupdate = true

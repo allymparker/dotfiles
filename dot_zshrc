@@ -101,12 +101,22 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias kc=kubectx
-alias kn=kubens
+alias kns=kubens
 alias kz=kustomize
 alias cm=chezmoi
+# dir aliases
+alias sosrc="cd ~/src/stackeng/StackOverflow"
+alias idsrc="cd ~/src/stackeng/StackOverflow.Identity"
+alias petsrc="cd ~/src/stackeng/PlatEngTools"
+alias daily="vim ~/daily.md"
+alias scratch="cd ~/src/scratch"
+
 
 if [ -f ~/.secrets ]; then
   source ~/.secrets
 fi
 
 eval "$(starship init zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/.dev-local-setup

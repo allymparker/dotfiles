@@ -10,6 +10,7 @@
 	cm = checkout main
 	cob = "!f(){ git checkout -b $1; }; f"
 	rc = rebase --continue
+	mt = merge-tool
 	ra = rebase --abort
 	rhm = reset --hard origin/main
 	rh = "!f(){ git reset --hard; git clean -f; }; f"
@@ -45,6 +46,7 @@
     pager = delta
     editor = vim
 	autocrlf = input
+	eol = lf
 [delta]
     side-by-side = true
 
@@ -52,3 +54,5 @@
     diffFilter = delta --color-only
 [init]
 	defaultBranch = main
+[push]
+	autoSetupRemote = true

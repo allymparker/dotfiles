@@ -27,18 +27,6 @@ set incsearch
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR>
 
-" Remove newbie crutches in Normal Mode
-nnoremap <Down> :echo "N00B!"<CR>
-nnoremap <Left> :echo "N00B!"<CR>
-nnoremap <Right> :echo "N00B!"<CR>
-nnoremap <Up> :echo "N00B!"<CR>
-
-" Remove newbie crutches in Visual Mode
-vnoremap <Down> :echo "N00B!"<CR>
-vnoremap <Left> :echo "N00B!"<CR>
-vnoremap <Right> :echo "N00B!"<CR>
-vnoremap <Up> :echo "N00B!"<CR>
-
 " Always keep current line vertically centered
 augroup VCenterCursor
   au!
@@ -58,6 +46,8 @@ Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -66,6 +56,18 @@ let NERDTreeMinimalUI = 1
 let NERDTreeShowHidden=1
 
 " bindings
+nnoremap <SPACE> <Nop>
+let mapleader=" " 
+
+" search file history with ,-e (fzf.vim)
+nnoremap <leader>e :History<CR>
+
+" search all files with ,-p (fzf.vim)
+nnoremap <leader>p :Files<CR>
+
+" search git commits with ,-c (fzf.vim)
+nnoremap <leader>c :Commits<CR>
+
 nnoremap <Leader>n :NERDTreeToggle<Enter>
 
 " set space duck colors

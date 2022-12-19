@@ -105,9 +105,8 @@ alias kns=kubens
 alias kz=kustomize
 alias cm=chezmoi
 # dir aliases
-alias sosrc="cd ~/src/stackeng/StackOverflow"
-alias idsrc="cd ~/src/stackeng/StackOverflow.Identity"
-alias petsrc="cd ~/src/stackeng/PlatEngTools"
+alias src="~/src/"
+alias seso="cd ~/src/stackeng/StackOverflow"
 alias daily="vim ~/daily.md"
 alias scratch="cd ~/src/scratch"
 
@@ -119,4 +118,3 @@ fi
 eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source ~/.dev-local-setup
